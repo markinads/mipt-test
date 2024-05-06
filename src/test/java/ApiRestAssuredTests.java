@@ -2,6 +2,9 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.Locale;
+
 import static org.hamcrest.Matchers.equalTo;
 
 import static io.restassured.RestAssured.given;
@@ -92,12 +95,10 @@ public class ApiRestAssuredTests {
         String userId = postUser("", JSON_BODY).extract().body().path("message");
 
         String endpoint = BASE_URL + TEST_USER_NAME;
-        String putJsonBody =
-                        "{" +
-                        "\"id\": " + Long.parseLong(userId) + "," +
-                        "\"email\": \"test@mipt.ru\"," +
-                        "\"phone\": \"79012225555\"" +
-                        "}";
+        String putJsonBody = JSON_BODY.
+                replace("\"id\": 0", "\"id\": " + userId).
+                replace("testuser@mipt.ru", "test@mipt.ru").
+                replace("79012224444", "79012225555");
         ValidatableResponse putResponse = given().
                 header("accept", "application/json").
                 header("Content-Type", "application/json").
@@ -113,6 +114,7 @@ public class ApiRestAssuredTests {
         getUser(TEST_USER_NAME).
                 assertThat().
                 statusCode(200).
+                body("id", equalTo(Long.parseLong(userId))).
                 body("username", equalTo(TEST_USER_NAME)).
                 body("email", equalTo("test@mipt.ru")).
                 body("phone", equalTo("+79012225555"));
