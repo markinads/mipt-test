@@ -7,7 +7,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Tag("selenium")
 class SeleniumTests {
     final String TEST_URL = "https://mipt.ru/";
     WebDriver driver;

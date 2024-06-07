@@ -1,11 +1,9 @@
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.List;
 
@@ -14,11 +12,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SeleniumLocatorsTest {
     public final static String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/web-form.html ";
-
+    static ChromeOptions options;
     WebDriver driver;
+
+    @BeforeAll
+    static void setup() {
+        options = new ChromeOptions();
+        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+        options.addArguments("--no-sandbox"); // Bypass OS security model
+        options.addArguments("--headless"); // without browser interface
+    }
+
     @BeforeEach
     void start() {
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         driver.get(BASE_URL);
     }
 
