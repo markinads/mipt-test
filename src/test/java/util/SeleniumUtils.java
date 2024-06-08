@@ -1,13 +1,18 @@
 package util;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.google.common.io.Files;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Step;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.function.Function;
+
+import static com.codeborne.selenide.Screenshots.takeScreenShotAsFile;
 
 public class SeleniumUtils {
     public final static String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java";
@@ -71,5 +76,16 @@ public class SeleniumUtils {
         } else {
             return value;
         }
+    }
+
+    @Attachment(value = "Screenshot", type = "image/png")
+    @Step("Capture screenshot with Selenide")
+    public static byte[] captureScreenshotSelenide() throws IOException {
+        return Files.toByteArray(takeScreenShotAsFile());
+    }
+
+    @Step("Capture screenshot with Selenide (extension)")
+    public static void captureScreenshotSelenideSpoiler() throws IOException {
+        Allure.addAttachment("Screenshot", new ByteArrayInputStream(Files.toByteArray(takeScreenShotAsFile())));
     }
 }

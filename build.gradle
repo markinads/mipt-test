@@ -30,6 +30,7 @@ dependencies {
     implementation 'com.h2database:h2:2.2.224'
     implementation 'org.hibernate:hibernate-core:6.5.2.Final'
     implementation 'commons-io:commons-io:2.16.0'
+    implementation 'com.codeborne:selenide:7.3.1'
 
     test {
         useJUnitPlatform()
@@ -50,6 +51,12 @@ dependencies {
     tasks.register('additionalApiTest', Test) {
         useJUnitPlatform() {
             includeTags 'additionalApi'
+        }
+    }
+
+    tasks.register('selenide', Test) {
+        useJUnitPlatform() {
+            includeTags 'selenide'
         }
     }
 
