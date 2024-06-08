@@ -21,12 +21,13 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - uses: actions/cache@v3
+      - name: Caching 
+        uses: actions/cache@v3
         with:
           path: |
             /root/.gradle/caches
             /root/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('./*.gradle*', './subfolder*/*.gradle*') }}
           restore-keys: ${{ runner.os }}-gradle-
-        - name: Run some tests
+      - name: Run some tests
         run: ./gradlew clean smoke
