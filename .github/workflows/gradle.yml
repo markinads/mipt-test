@@ -22,4 +22,4 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Run some tests
-        run: ./gradlew clean smoke
+        run: ./gradlew clean additionalApi
