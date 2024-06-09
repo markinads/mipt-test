@@ -1,4 +1,9 @@
+import extension.AllureExtension;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.ElementNotInteractableException;
@@ -10,6 +15,9 @@ import java.io.File;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+@Epic("Selenium")
+@Feature("Bonigarcia")
+@Story("Web form")
 public class WebFormPageTests {
     static MainPage mainPage;
     static WebFormPage webFormPage;
@@ -38,6 +46,14 @@ public class WebFormPageTests {
     @DisplayName("Проверка ввода в disabled поле")
     void testDisabledTextInput() {
         assertThrows(ElementNotInteractableException.class, () -> webFormPage.setDisabledText("test"));
+        assertThat(webFormPage.getDisabledText()).isEqualTo("");
+    }
+
+    @Test
+    @DisplayName("Падающий тест для проверки скриншота в Allure")
+    @ExtendWith(AllureExtension.class)
+    void testFailedWithScreenshot() {
+        webFormPage.setDisabledText("test");
         assertThat(webFormPage.getDisabledText()).isEqualTo("");
     }
 

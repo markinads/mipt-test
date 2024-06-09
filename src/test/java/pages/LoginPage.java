@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -32,16 +33,19 @@ public class LoginPage extends BasePage {
         super(driver, URL);
     }
 
+    @Step("Попытка авторизации с логином {username}, паролем {password}")
     public void with(String username, String password) {
         type(usernameInput, username);
         type(passwordInput, password);
         click(submitButton);
     }
 
+    @Step("Проверка сообщения об успешной авторизации")
     public boolean successBoxPresent() {
         return isDisplayed(successBox);
     }
 
+    @Step("Проверка сообщения о неуспешной авторизации")
     public boolean invalidCredentialsBoxPresent() {
         return isDisplayed(invalidCredentialsBox);
     }
