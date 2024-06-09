@@ -1,12 +1,20 @@
+import extension.AllureExtension;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import pages.LoginPage;
 import pages.MainPage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Epic("Selenium")
+@Feature("Bonigarcia")
+@Story("Login form")
 public class LoginPageTests {
     MainPage mainPage;
 
