@@ -11,6 +11,10 @@ import org.openqa.selenium.support.ui.Select;
 public class WebFormPage extends BasePage {
     public static final String URL = "https://bonigarcia.dev/selenium-webdriver-java/web-form.html";
 
+    @FindBy(css = ".display-6")
+    @CacheLookup
+    WebElement webformText;
+
     @FindBy(id = "my-text-id")
     @CacheLookup
     WebElement textInput;
@@ -94,4 +98,7 @@ public class WebFormPage extends BasePage {
     public boolean isSelectedCheck2() {
         return isSelected(checkbox2);
     }
+
+    public String getTitle() { return driver.getTitle();}
+    public String getWebformText() { return webformText.getText();}
 }

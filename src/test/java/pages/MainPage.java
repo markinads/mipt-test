@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -24,6 +25,10 @@ public class MainPage extends BasePage {
 
     public MainPage(String browser) {
         super(browser, URL);
+    }
+
+    public MainPage(WebDriver driver) {
+        super(driver, URL);
     }
 
     @Step("Открытие страницы Login Form")
